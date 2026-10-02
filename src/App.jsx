@@ -3,7 +3,7 @@ import AdminLayout from './components/Admin/AdminLayout'
 import {createBrowserRouter,createRoutesFromElements,Route, RouterProvider} from 'react-router-dom';
 import Products from './components/Products';
 import ProductDetails from './components/ProductDetails';
-import {getProducts} from './productServices';
+import {getProductDetails, getProducts} from './productServices';
 import './App.css'
 
 function App() {
@@ -54,7 +54,7 @@ const routes = createRoutesFromElements(
             element={<Products />} />
             
           
-          <Route path='/products/:id' element={<ProductDetails/>} />
+          <Route loader={getProductDetails} errorElement={<h1>Data Not Found</h1>} path='/products/:id'   HydrateFallback={() => <h1>Loading Product Details.....</h1>} element={<ProductDetails/>} />
     </Route>
     {/* Admin Layout for admin pages */}
     <Route path='/admin' element={<AdminLayout />}>
